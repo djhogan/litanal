@@ -1,1 +1,1 @@
-The project is setup for deployment to heroku. To deploy it manually, install the dependencies in package.json using npm and the python dependencies listed in requirements.txt. Build with "npm build" and start the server with "npm start" or "node server.js".
+The project is setup for deployment to heroku. To deploy it manually, install the node dependencies in package.json using npm and the python dependencies listed in requirements.txt. Build with "npm build" and start the server with "npm start" or "node server.js".
