@@ -70,7 +70,7 @@ d3.selectAll('input')
 		fetch('/book/' + this.value).then((res) => {
 			res.text().then((text) => {
 				// update figure with data
-        d3.select("tooltip")
+        d3.select(".tooltip")
           .text("Loading...");
 				json = JSON.parse(text);
 				Figure.update(json);
