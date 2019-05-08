@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Daniel's Code Sample</title>
+		<link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <h1>Sentiment Analysis of Classic Literature</h1>
+
+		<p>
+		Sentiment analysis measures the polarity of a piece of text. In this context, polarity refers to the feelings conveyed by thetext, where a positive polarity is indicates "good" feelings (e.g. excitement, arousal, laughter) and a negative polarity indicates "bad" feelings (e.g. anger, sadness, jealousy). Select one of the great works of literature below to see a its sentiment analysis on a per-sentence basis. The score shown represents a moving mean taken over a window of 100 sentences in width.
+		</p>
+
+		<p>
+		The sentiment score for a piece of text was calculated as the sum of the word scores. The word scores were taken from the AFINN lexicon (Nielsen 2011). A score of 0 was assigned to words absent from the lexicon.
+		</p>
+
+		<input type="radio" name="book" value="frankenstein"> Frankenstein<br>
+		<input type="radio" name="book" value="wizard_of_oz"> Wizard of Oz<br>
+		<input type="radio" name="book" value="twenty_thousand_leagues"> Twenty Thousand Leagues<br>
+		<input type="radio" name="book" value="heart_of_darkness"> Heart of Darkness<br>
+		<input type="radio" name="book" value="jungle_book"> The Jungle Book<br>
+
+    <svg></svg>
+
+		<div class="tooltip"></div>
+    
+    <script src="bundle.js"></script>
+  </body>
+</html>

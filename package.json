@@ -1,0 +1,17 @@
+{
+  "name": "mentor",
+  "version": "1.0.0",
+  "description": "Mentor code sample.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "d3": "^5.9.2",
+    "express": "^4.16.4",
+    "fetch": "^1.1.0",
+    "requirejs": "^2.3.6"
+  }
+}

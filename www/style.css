@@ -1,0 +1,46 @@
+/* The side navigation menu */
+.sidenav {
+  width: 200px; /* 0 width - change this with JavaScript */
+  float: left;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 11pt;
+  font-weight: bolder;
+}
+
+/* The navigation menu links */
+.sidenav ul a {
+  display: block;
+  text-decoration: none;
+  line-height: 1.33;
+}
+
+.sidenav ul li ul li a {
+  display: block;
+}
+
+.content {
+  width: 500px;
+  margin-left: 220px;
+  margin-right: 32px;
+  line-height: 1.33;
+}
+
+.content fieldset legend {
+  /* font-family: 'Helvetica', 'Arial', sans-serif;
+  font-size: 11pt;
+  font-weight: 600; */
+}
+
+.page {
+  width: 850px;
+  margin: 40px auto;
+}
+
+body {
+  overflow-y: scroll;
+}
+
+h1, h2, h3 {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  font-weight: 300;
+}
