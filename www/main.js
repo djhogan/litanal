@@ -28,7 +28,7 @@ Graph.updateWithData = function(data) {
 	this.svg.selectAll('*').remove();
 	this.data = data
   this.x = d3.scaleLinear()
-    .domain([-1, data.length])
+    .domain([0, data.length])
     .range([0, this.width]);
   this.y = d3.scaleLinear()
     .domain([-3, 3])
@@ -56,12 +56,10 @@ Graph.updateWithData = function(data) {
 		.attr("height", this.height)
 		.style("opacity", 0.0);
 	rect.on("click", () => {
-		console.log(d3.mouse(rect.node())[0]);
-		var idx = Math.round(this.x.invert(d3.mouse(rect.node())[0]));
-		console.log(idx);
+		var idx = Math.floor(this.x.invert(d3.mouse(rect.node())[0]));
 		d3.select(".tooltip")
 			.style("opacity", 1.0)
-			.text(this.data[idx].sentence);
+			.text("Sentence " + idx + ": " + this.data[idx].sentence);
 	});
 };
 
