@@ -74,6 +74,8 @@ d3.selectAll('input')
           .text("Loading...");
 				json = JSON.parse(text);
 				Figure.update(json);
+        d3.select(".tooltip)
+          .text("Loaded");
 			});
 		});
 	});
