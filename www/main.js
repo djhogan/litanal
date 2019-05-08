@@ -58,7 +58,6 @@ Graph.updateWithData = function(data) {
 	rect.on("click", () => {
 		var idx = Math.floor(this.x.invert(d3.mouse(rect.node())[0]));
 		d3.select(".tooltip")
-			.style("opacity", 1.0)
 			.text("Sentence " + idx + ": " + this.data[idx].sentence);
 	});
 };
@@ -70,8 +69,10 @@ d3.selectAll('input')
 	.on('change', function() {
 		fetch('/book/' + this.value).then((res) => {
 			res.text().then((text) => {
-				json = JSON.parse(text);
 				// update figure with data
+        d3.select("tooltip")
+          .text("Loading...");
+				json = JSON.parse(text);
 				Figure.update(json);
 			});
 		});
