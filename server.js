@@ -3,6 +3,8 @@ const path = require('path');
 const express = require('express');
 const app = express();
 
+const port = process.env.PORT || 8080;
+
 app.use(express.static(path.join(__dirname, 'www')));
 
 app.get('/book/:title', (req, res) => {
@@ -18,4 +20,4 @@ app.get('/book/:title', (req, res) => {
   readStream.pipe(pyProg.stdin);
 });
 
-app.listen(4000, () => console.log('Application listening on port 4000!'));
+app.listen(port, () => console.log('Application listening on port 4000!'));
