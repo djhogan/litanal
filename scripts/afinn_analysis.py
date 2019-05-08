@@ -6,8 +6,6 @@ import afinn
 import nltk
 import numpy as np
 
-# from contextlib import redirect_stdout
-# with redirect_stdout(open(os.devnull, 'w')):
 nltk.download('punkt')
 
 class TextScores:
@@ -26,18 +24,15 @@ class TextScores:
         sentences = [sentence for sentence in sentences if sentence != '.']
         scores = [scorer.score(sentence) for sentence in sentences]
         return TextScores(sentences, np.array(scores))
-    def cumulative():
-        pass
-        # return np.cumsum(self.scores)
-        ''' returns cumulative score.
-        '''
     def running_mean(self, width):
         ''' returns running mean.
         '''
         return np.convolve(self.scores, np.ones((width,))/width, mode='valid')
     def __str__(self):
+        retval = ''
         for score, sentence in zip(self.scores, self.sentences):
-            print(f'{score}\t{sentence}')
+            retval += f'{score}\t{sentence}'
+        return retval
 
 text = sys.stdin.read()
 scores = TextScores.from_text(text)
