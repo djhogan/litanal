@@ -23,10 +23,10 @@ Figure.children = [
 ];
 
 Graph.updateWithData = function(data) {
-	/* add axes and plot sentence sentiment
-	*/
-	this.svg.selectAll('*').remove();
-	this.data = data
+  /* add axes and plot sentence sentiment
+  */
+  this.svg.selectAll('*').remove();
+  this.data = data;
   this.x = d3.scaleLinear()
     .domain([0, data.length])
     .range([0, this.width]);
@@ -42,24 +42,24 @@ Graph.updateWithData = function(data) {
   this.svg.append('g')
     .attr('class', 'y axis')
     .call(this.yAxis);
-	this.svg.selectAll("circle")
-		.data(data)
-		.enter()
-		.append("circle")
-		.attr("cx", (d, i) => this.x(i))
-		.attr("cy", (d) => this.y(d.mean))
-		.attr("r", 0.8);
-	var rect = this.svg.append("rect")
-		.attr("x", 0)
-		.attr("y", 0)
-		.attr("width", this.width)
-		.attr("height", this.height)
-		.style("opacity", 0.0);
-	rect.on("click", () => {
-		var idx = Math.floor(this.x.invert(d3.mouse(rect.node())[0]));
-		d3.select(".tooltip")
-			.text("Sentence " + idx + ": " + this.data[idx].sentence);
-	});
+  this.svg.selectAll("circle")
+    .data(data)
+    .enter()
+    .append("circle")
+    .attr("cx", (d, i) => this.x(i))
+    .attr("cy", (d) => this.y(d.mean))
+    .attr("r", 0.8);
+  var rect = this.svg.append("rect")
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", this.width)
+    .attr("height", this.height)
+    .style("opacity", 0.0);
+  rect.on("click", () => {
+    var idx = Math.floor(this.x.invert(d3.mouse(rect.node())[0]));
+    d3.select(".tooltip")
+      .text("Sentence " + idx + ": " + this.data[idx].sentence);
+  });
 };
 
 // initialize the figure containers
