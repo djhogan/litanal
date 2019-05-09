@@ -66,17 +66,17 @@ Graph.updateWithData = function(data) {
 Figure.initialize(d3.select('svg'));
 
 d3.selectAll('input')
-	.on('change', function() {
+  .on('change', function() {
     d3.select(".tooltip")
       .text("Loading...");
-		fetch('/book/' + this.value).then((res) => {
-			res.text().then((text) => {
-				// update figure with data
-				json = JSON.parse(text);
-				Figure.update(json);
+    fetch('/book/' + this.value).then((res) => {
+      res.text().then((text) => {
+        // update figure with data
+        json = JSON.parse(text);
+        Figure.update(json);
         d3.select(".tooltip")
           .text("Loaded");
-			});
-		});
-	});
+      });
+    });
+  });
 
