@@ -4,7 +4,7 @@ function Element(tag, width, height) {
   this.height = height
   this.children = []
 }
-  
+
 Element.prototype.initialize = function(svg) {
   this.svg = svg
     .attr("width", this.width)
@@ -19,8 +19,6 @@ Element.prototype.initialize = function(svg) {
   if (this.hasOwnProperty('postInitialize')) {
     this.postInitialize()
   }
-  // If after initialize method, then call it
-  // Set up event paths
 }
 
 Element.prototype.update = function(data) {
