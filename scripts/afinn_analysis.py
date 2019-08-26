@@ -64,13 +64,13 @@ class TextScores:
         return retval
 
 if __name__ == '__main__':
-    options, arguments = docopt(__doc__)
+    arguments = docopt(__doc__)
     text = sys.stdin.read()
     scores = TextScores.from_text(text)
     scores_list = []
     for score, sentence, mean in zip(
             scores.scores, 
             scores.sentences, 
-            scores.running_mean(options.w)):
+            scores.running_mean(int(arguments['-w']))):
         scores_list.append({'score': score, 'sentence': sentence, 'mean': mean})
     print(json.dumps(scores_list))
