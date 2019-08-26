@@ -1,11 +1,11 @@
 # -*- coding utf-8 -*-
-"""Usage: afinn_analysis.py [-hw WINDOW_WIDTH]
+""" Usage: afinn_analysis.py [-hw WINDOW_WIDTH]
 
 Sentiment analysis using the AFINN lexicon.
 
 -h                  Show this.
--w WINDOW_WIDTH     Width of window (in words) for averaging sentiment score across text [default: 100].
-
+-w WINDOW_WIDTH     Width of window (in words) for averaging sentiment score 
+                    across text [default: 100].
 """
 from docopt import docopt
 
@@ -20,21 +20,19 @@ import numpy as np
 nltk.download('punkt')
 
 class TextScores:
-    """Dataset of sentences and associated sentiment scores.
+    """ Dataset of sentences and associated sentiment scores.
 
     Attributes:
         sentences: List of setences.
         scores: List of sentiment scores for `sentences`.
-
     """
-
     def __init__(self, sentences, scores):
         self.sentences = sentences
         self.scores = scores
 
     @staticmethod
     def from_text(text):
-        ''' Creates a `TextScores` object from the given string.
+        """ Creates a `TextScores` object from the given string.
 
         The given string is tokenized into sentences and sentiments scores are 
         calculated for each sentence.
@@ -44,7 +42,7 @@ class TextScores:
 
         Returns:
             A TextScores object.
-        '''
+        """
         text_fmt = text.replace('\n', ' ')
         text_fmt = re.sub(r'[ ]+', ' ', text_fmt)
         text_fmt = re.sub(r'[.]+', '.', text_fmt)
@@ -54,8 +52,15 @@ class TextScores:
         scores = [scorer.score(sentence) for sentence in sentences]
         return TextScores(sentences, np.array(scores))
     def running_mean(self, width):
-        ''' Returns the running mean.
-        '''
+        """ Calculate the sliding average of sentiment scores.
+
+        Args:
+            width (int):    Width of the window (in sentences) over which to 
+                            calculate the sliding average.
+
+        Returns:
+            A numpy array of the smoothed scores.
+        """
         return np.convolve(self.scores, np.ones((width,))/width, mode='valid')
     def __str__(self):
         retval = ''
