@@ -3,8 +3,8 @@
 
 Sentiment analysis using the AFINN lexicon.
 
--h                  show this
--w WINDOW_WIDTH     width of window (in words) for averaging sentiment score across text
+-h                  Show this.
+-w WINDOW_WIDTH     Width of window (in words) for averaging sentiment score across text [default: 100].
 
 """
 from docopt import docopt
