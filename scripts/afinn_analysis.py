@@ -1,3 +1,14 @@
+# -*- coding utf-8 -*-
+"""Usage: afinn_analysis.py [-hw WINDOW_WIDTH]
+
+Sentiment analysis using the AFINN lexicon.
+
+-h                  show this
+-w WINDOW_WIDTH     width of window (in words) for averaging sentiment score across text
+
+"""
+from docopt import docopt
+
 import os
 import re
 import sys
@@ -9,12 +20,30 @@ import numpy as np
 nltk.download('punkt')
 
 class TextScores:
+    """Dataset of sentences and associated sentiment scores.
+
+    Attributes:
+        sentences: List of setences.
+        scores: List of sentiment scores for `sentences`.
+
+    """
+
     def __init__(self, sentences, scores):
         self.sentences = sentences
         self.scores = scores
+
     @staticmethod
     def from_text(text):
-        ''' returns text scores of text.
+        ''' Creates a `TextScores` object from the given string.
+
+        The given string is tokenized into sentences and sentiments scores are 
+        calculated for each sentence.
+
+        Args:
+            text (str): The text to analyze.
+
+        Returns:
+            A TextScores object.
         '''
         text_fmt = text.replace('\n', ' ')
         text_fmt = re.sub(r'[ ]+', ' ', text_fmt)
@@ -25,7 +54,7 @@ class TextScores:
         scores = [scorer.score(sentence) for sentence in sentences]
         return TextScores(sentences, np.array(scores))
     def running_mean(self, width):
-        ''' returns running mean.
+        ''' Returns the running mean.
         '''
         return np.convolve(self.scores, np.ones((width,))/width, mode='valid')
     def __str__(self):
@@ -34,12 +63,14 @@ class TextScores:
             retval += f'{score}\t{sentence}'
         return retval
 
-text = sys.stdin.read()
-scores = TextScores.from_text(text)
-scores_list = []
-for score, sentence, mean in zip(
-        scores.scores, 
-        scores.sentences, 
-        scores.running_mean(100)):
-    scores_list.append({'score': score, 'sentence': sentence, 'mean': mean})
-print(json.dumps(scores_list))
+if __name__ == '__main__':
+    options, arguments = docopt(__doc__)
+    text = sys.stdin.read()
+    scores = TextScores.from_text(text)
+    scores_list = []
+    for score, sentence, mean in zip(
+            scores.scores, 
+            scores.sentences, 
+            scores.running_mean(options.w)):
+        scores_list.append({'score': score, 'sentence': sentence, 'mean': mean})
+    print(json.dumps(scores_list))
