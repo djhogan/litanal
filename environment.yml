@@ -1,8 +1,10 @@
 name: mentor
-channels:
 dependencies:
-    - numpy
-    - nltk
-    - pip:
-        - afinn
-
+  - python=3
+  - numpy
+  - nltk
+  - pip
+  - pip:
+    - afinn
+  - docopt
+  - sphinx
