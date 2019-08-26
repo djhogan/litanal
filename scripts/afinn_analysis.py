@@ -4,8 +4,7 @@
 Sentiment analysis using the AFINN lexicon.
 
 -h                  Show this.
--w WINDOW_WIDTH     Width of window (in words) for averaging sentiment score 
-                    across text [default: 100].
+-w WINDOW_WIDTH     Width of window (in sentences) for calculating the sliding average of sentiment scores [default: 100].
 """
 from docopt import docopt
 
@@ -51,6 +50,7 @@ class TextScores:
         sentences = [sentence for sentence in sentences if sentence != '.']
         scores = [scorer.score(sentence) for sentence in sentences]
         return TextScores(sentences, np.array(scores))
+    
     def running_mean(self, width):
         """ Calculate the sliding average of sentiment scores.
 
@@ -62,6 +62,7 @@ class TextScores:
             A numpy array of the smoothed scores.
         """
         return np.convolve(self.scores, np.ones((width,))/width, mode='valid')
+    
     def __str__(self):
         retval = ''
         for score, sentence in zip(self.scores, self.sentences):
